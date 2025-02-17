@@ -72,9 +72,10 @@ resource "yandex_compute_instance" "nat-instance" {
     }
   }
   network_interface {
-    subnet_id          = yandex_vpc_subnet.public.id
-    security_group_ids = [yandex_vpc_security_group.nat-instance-sg.id]
-    nat                = true
+    subnet_id                      = yandex_vpc_subnet.public.id
+    network_interface.0.ip_address = "192.168.10.254"
+    security_group_ids             = [yandex_vpc_security_group.nat-instance-sg.id]
+    nat                            = true
   }
   scheduling_policy { preemptible = true }
   metadata = {
