@@ -30,6 +30,7 @@ resource "yandex_vpc_gateway" "nat-gateway" {
 resource "yandex_vpc_route_table" "route-table" {
   network_id = yandex_vpc_network.public.id
   static_route {
+    name               = "default"
     destination_prefix = "0.0.0.0/0"
     gateway_id         = yandex_vpc_gateway.nat-gateway.id
   }
