@@ -21,7 +21,18 @@ resource "yandex_vpc_subnet" "private" {
 }
 
 # VPC NAT gateway
+resource "yandex_vpc_gateway" "nat-gateway" {
+  name = "nat-gateway"
+  shared_egress_gateway {}
+}
 
 # VPC route table
+resource "yandex_vpc_route_table" "route-table" {
+  network_id = yandex_vpc_network.rt.id
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.nat-gateway.id
+  }
+}
 
 # VPC security group
