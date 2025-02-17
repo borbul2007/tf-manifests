@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "yandex" {
-  cloud_id                 = "b1guau0af4j7qkg1484e"
-  folder_id                = "b1gb1gkg5og1lpl8fc1563m"
+  cloud_id                 = var.cloud_id
+  folder_id                = var.folder_id
   service_account_key_file = file("~/key.json")
-  zone                     = "ru-central1-a"
+  zone                     = var.default_zone
 }
