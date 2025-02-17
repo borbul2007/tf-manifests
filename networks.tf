@@ -28,7 +28,7 @@ resource "yandex_vpc_gateway" "nat-gateway" {
 
 # VPC route table
 resource "yandex_vpc_route_table" "route-table" {
-  network_id = yandex_vpc_network.rt.id
+  network_id = yandex_vpc_network.public.id
   static_route {
     destination_prefix = "0.0.0.0/0"
     gateway_id         = yandex_vpc_gateway.nat-gateway.id
