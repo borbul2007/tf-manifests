@@ -55,7 +55,7 @@ resource "yandex_compute_instance" "private" {
 }
 
 resource "yandex_compute_instance" "nat-instance" {
-  name        = local.vm_nat_name
+  name        = "nat-instance"
   platform_id = "standard-v1"
   zone        = var.default_zone
   resources {
