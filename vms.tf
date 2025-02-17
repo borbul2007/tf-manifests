@@ -64,10 +64,12 @@ resource "yandex_compute_instance" "nat-instance" {
     memory        = 1
   }
   boot_disk {
-  name     = "boot-disk-nat"
-  type     = "network-hdd"
-  size     = "5"
-  image_id = "fd80mrhj8fl2oe87o4e1"
+    initialize_params {
+      name     = "boot-disk-nat"
+      type     = "network-hdd"
+      size     = "5"
+      image_id = "fd80mrhj8fl2oe87o4e1"
+    }
   }
   network_interface {
     subnet_id          = yandex_vpc_subnet.public.id
