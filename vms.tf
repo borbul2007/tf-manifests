@@ -16,6 +16,7 @@ resource "yandex_compute_instance" "public" {
       type     = "network-hdd"
       size     = 5
     }
+  }
   network_interface {
     subnet_id = yandex_vpc_subnet.public.id
     nat       = true
@@ -41,6 +42,7 @@ resource "yandex_compute_instance" "private" {
       type     = "network-hdd"
       size     = 5
     }
+  }
   network_interface {
     subnet_id = yandex_vpc_subnet.private.id
   }
