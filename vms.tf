@@ -24,7 +24,7 @@ resource "yandex_compute_instance" "public" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    ssh-keys = "ubuntu:${file("~/.ssh/id_ed25519.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
 
@@ -50,6 +50,6 @@ resource "yandex_compute_instance" "private" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    ssh-keys = "ubuntu:${file("~/.ssh/id_ed25519.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
