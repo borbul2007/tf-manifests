@@ -1,5 +1,7 @@
 # VPC networks
-resource "yandex_vpc_network" "public" {}
+resource "yandex_vpc_network" "public" {
+  name = "public"
+}
 resource "yandex_vpc_network" "private" {
   name = "private"
 }

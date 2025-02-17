@@ -6,7 +6,7 @@ variable "cloud_id" {
 
 variable "folder_id" {
   type        = string
-  default     = "1gb1gkg5og1lpl8fc1563m"
+  default     = "b1gkg5og1lpl8fc1563m"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
 
