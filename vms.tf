@@ -76,6 +76,6 @@ resource "yandex_compute_instance" "nat-instance" {
   }
   scheduling_policy { preemptible = true }
   metadata = {
-    user-data = "#cloud-config\nusers:\n  - name: "ubuntu"\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/.ssh/id_rsa.pub")}"
+    user-data = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/.ssh/id_rsa.pub")}"
   }
 }
