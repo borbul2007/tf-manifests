@@ -64,8 +64,8 @@ variable "vm_yandex_compute_instance_resources_core_fraction" {
   description = "Number of core fraction"
 }
 
-variable "vms_ssh_root_key" {
+variable "ssh_root_key_file" {
   type        = string
-  default     = "ubuntu:${file("~/nt-ssh/id_ed25519.pub")}"
+  default     = "~/nt-ssh/id_ed25519.pub"
   description = "ssh-keygen -t ed25519"
 }
