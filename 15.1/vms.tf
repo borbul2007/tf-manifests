@@ -74,9 +74,9 @@ resource "yandex_compute_instance" "nat" {
     }
   }
   network_interface {
-    subnet_id          = yandex_vpc_subnet.public.id
-    ip_address         = var.vm_nat_yandex_compute_ip_address
-    nat                = true
+    subnet_id  = yandex_vpc_subnet.public.id
+    ip_address = var.vm_nat_yandex_compute_ip_address
+    nat        = true
   }
   scheduling_policy { preemptible = true }
   metadata = {
