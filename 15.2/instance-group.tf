@@ -1,3 +1,7 @@
+data "yandex_compute_image" "lamp" {
+  family = var.vm_yandex_compute_image_family
+}
+
 resource "yandex_iam_service_account" "instance-group-sa" {
   name        = "instance-group-sa"
   description = "Service account for managing the instance group"
@@ -26,7 +30,7 @@ resource "yandex_compute_instance_group" "instance-group" {
     }
     boot_disk {
       initialize_params {
-        image_id = "fd827b91d99psvq5fjit"
+      image_id = data.yandex_compute_image.lamp.image_id
       }
     }
     network_interface {
@@ -36,7 +40,8 @@ resource "yandex_compute_instance_group" "instance-group" {
     }
     scheduling_policy { preemptible = true }
     metadata = {
-      user-data = "${file("cloud-init.yaml")}"
+      serial-port-enable = 1
+      user-data          = "${file("cloud-init.yaml")}"
     }
   }
   scale_policy {
