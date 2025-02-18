@@ -1,9 +1,3 @@
-resource "yandex_resourcemanager_folder_iam_member" "load-balancer-editor" {
-  folder_id = var.folder_id
-  role      = "load-balancer.editor"
-  member    = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
-}
-
 resource "yandex_lb_network_load_balancer" "load-balancer" {
   name = "network-load-balancer"
   listener {
