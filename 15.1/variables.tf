@@ -28,12 +28,6 @@ variable "private_yandex_vpc_subnet_default_cidr" {
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
-variable "private_yandex_vpc_subnet_default_cidr" {
-  type        = list(string)
-  default     = ["192.168.20.0/24"]
-  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
-}
-
 variable "vm_nat_yandex_compute_ip_address" {
   type        = string
   default     = "192.168.10.254"
