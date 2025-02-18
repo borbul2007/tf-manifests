@@ -42,7 +42,8 @@ resource "yandex_compute_instance" "private" {
     }
   }
   network_interface {
-    subnet_id = yandex_vpc_subnet.private.id
+    subnet_id          = yandex_vpc_subnet.private.id
+    security_group_ids = [yandex_vpc_security_group.private.id]
   }
   scheduling_policy { preemptible = true }
   metadata = {
@@ -70,7 +71,6 @@ resource "yandex_compute_instance" "nat" {
   network_interface {
     subnet_id          = yandex_vpc_subnet.public.id
     ip_address         = "192.168.10.254"
-    security_group_ids = [yandex_vpc_security_group.public-sg.id]
     nat                = true
   }
   scheduling_policy { preemptible = true }

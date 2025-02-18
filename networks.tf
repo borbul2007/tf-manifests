@@ -21,8 +21,8 @@ resource "yandex_vpc_subnet" "private" {
 }
 
 # VPC route table
-resource "yandex_vpc_route_table" "nat-route" {
-  name       = "nat-route"
+resource "yandex_vpc_route_table" "nat" {
+  name       = "nat"
   network_id = yandex_vpc_network.private.id
   static_route {
     destination_prefix = "0.0.0.0/0"
@@ -31,9 +31,9 @@ resource "yandex_vpc_route_table" "nat-route" {
 }
 
 # VPC security group
-resource "yandex_vpc_security_group" "public-sg" {
-  name       = "public-sg"
-  network_id = yandex_vpc_network.public.id
+resource "yandex_vpc_security_group" "private" {
+  name       = "private"
+  network_id = yandex_vpc_network.private.id
   egress {
     protocol       = "ANY"
     description    = "any"
