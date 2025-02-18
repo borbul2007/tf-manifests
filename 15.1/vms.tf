@@ -1,17 +1,24 @@
+data "yandex_compute_image" "ubuntu" {
+  family = var.vm_yandex_compute_image_family
+}
+data "yandex_compute_image" "nat" {
+  family = var.vm_nat_yandex_compute_image_family
+}
+
 resource "yandex_compute_instance" "public" {
   name        = "public"
-  platform_id = "standard-v1"
+  platform_id = var.vm_yandex_compute_instance_platform_id
   zone        = var.default_zone
   resources {
-    cores  = 2
-    memory = 1
-    core_fraction = 5
+    cores         = var.vm_yandex_compute_instance_resources_cores
+    memory        = var.vm_yandex_compute_instance_resources_memory
+    core_fraction = var.vm_yandex_compute_instance_resources_core_fraction
   }
   boot_disk {
     initialize_params {
-      image_id = "fd8guaqmm9vfb6ev4cc8"
-      type     = "network-hdd"
-      size     = 10
+      image_id = data.yandex_compute_image.ubuntu.image_id
+#      type     = "network-hdd"
+#      size     = 10
     }
   }
   network_interface {
@@ -27,22 +34,22 @@ resource "yandex_compute_instance" "public" {
 
 resource "yandex_compute_instance" "private" {
   name        = "private"
-  platform_id = "standard-v1"
+  platform_id = var.vm_yandex_compute_instance_platform_id
   zone        = var.default_zone
   resources {
-    cores  = 2
-    memory = 1
-    core_fraction = 5
+    cores         = var.vm_yandex_compute_instance_resources_cores
+    memory        = var.vm_yandex_compute_instance_resources_memory
+    core_fraction = var.vm_yandex_compute_instance_resources_core_fraction
   }
   boot_disk {
     initialize_params {
-      image_id = "fd8guaqmm9vfb6ev4cc8"
-      type     = "network-hdd"
-      size     = 10
+      image_id = data.yandex_compute_image.ubuntu.image_id
+ #     type     = "network-hdd"
+ #     size     = 10
     }
   }
   network_interface {
-    subnet_id          = yandex_vpc_subnet.private.id
+    subnet_id = yandex_vpc_subnet.private.id
   }
   scheduling_policy { preemptible = true }
   metadata = {
@@ -53,18 +60,18 @@ resource "yandex_compute_instance" "private" {
 
 resource "yandex_compute_instance" "nat" {
   name        = "nat"
-  platform_id = "standard-v1"
+  platform_id = var.vm_yandex_compute_instance_platform_id
   zone        = var.default_zone
   resources {
-    core_fraction = 5
-    cores         = 2
-    memory        = 1
+    cores         = var.vm_yandex_compute_instance_resources_cores
+    memory        = var.vm_yandex_compute_instance_resources_memory
+    core_fraction = var.vm_yandex_compute_instance_resources_core_fraction
   }
   boot_disk {
     initialize_params {
-      image_id = "fd80mrhj8fl2oe87o4e1"
-      type     = "network-hdd"
-      size     = 10
+      image_id = data.yandex_compute_image.nat.image_id
+#      type     = "network-hdd"
+#      size     = 10
     }
   }
   network_interface {
