@@ -14,8 +14,8 @@ resource "yandex_compute_instance_group" "instance-group" {
       }
     }
     network_interface {
-      network_id = var.yandex_vpc_network.network.id
-      subnet_ids = [var.yandex_vpc_subnet.private.id]
+      network_id = "${yandex_vpc_network.network.id}"
+      subnet_ids = ["${yandex_vpc_subnet.private.id}"]
     }
     scheduling_policy { preemptible = true }
     metadata = {
