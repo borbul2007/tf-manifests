@@ -11,7 +11,7 @@ resource "yandex_compute_instance" "public" {
     initialize_params {
       image_id = "fd8guaqmm9vfb6ev4cc8"
       type     = "network-hdd"
-      size     = 5
+      size     = 10
     }
   }
   network_interface {
@@ -38,7 +38,7 @@ resource "yandex_compute_instance" "private" {
     initialize_params {
       image_id = "fd8guaqmm9vfb6ev4cc8"
       type     = "network-hdd"
-      size     = 5
+      size     = 10
     }
   }
   network_interface {
@@ -64,7 +64,7 @@ resource "yandex_compute_instance" "nat" {
     initialize_params {
       image_id = "fd80mrhj8fl2oe87o4e1"
       type     = "network-hdd"
-      size     = 5
+      size     = 10
     }
   }
   network_interface {
