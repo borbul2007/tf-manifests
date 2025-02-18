@@ -52,8 +52,4 @@ resource "yandex_compute_instance_group" "instance-group" {
   allocation_policy {
     zones = [var.default_zone]
   }
-  deploy_policy {
-    max_unavailable = 1
-    max_expansion   = 0
-  }
 }
