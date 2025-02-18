@@ -36,7 +36,7 @@ variable "vm_nat_yandex_compute_ip_address" {
 
 variable "vm_yandex_compute_image_family" {
   type        = string
-  default     = "ubuntu-2004-lts"
+  default     = "ubuntu-2204-lts"
   description = "VM image family"
 }
 

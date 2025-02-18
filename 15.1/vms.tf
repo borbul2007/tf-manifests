@@ -68,7 +68,9 @@ resource "yandex_compute_instance" "nat" {
   }
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.nat.image_id
+#      image_id = data.yandex_compute_image.nat.image_id
+      image_id = "fd80mrhj8fl2oe87o4e1"
+
     }
   }
   network_interface {
