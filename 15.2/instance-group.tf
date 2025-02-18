@@ -60,9 +60,9 @@ resource "yandex_compute_instance_group" "instance-group" {
     max_expansion   = 0
   }
   health_check {
-    interval = 2
-    interval = 2
-    healthy_threshold = 2
+    interval            = 2
+    timeout             = 1
+    healthy_threshold   = 2
     unhealthy_threshold = 2
       http_options {
         port = 80
