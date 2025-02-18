@@ -29,33 +29,39 @@ variable "private_yandex_vpc_subnet_default_cidr" {
 }
 
 variable "vm_yandex_compute_image_family" {
-    type    = string
-    default = "ubuntu-2004-lts"
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "VM image family"
 }
 
 variable "vm_nat_yandex_compute_image_family" {
-    type    = string
-    default = "nat-instance-ubuntu"
+  type    = string
+  default = "nat-instance-ubuntu"
+  description = "VM image family"
 }
 
 variable "vm_yandex_compute_instance_platform_id" {
-    type    = string
-    default = "standard-v1"
+  type    = string
+  default = "standard-v1"
+  description = "VM platform ID"
 }
 
 variable "vm_yandex_compute_instance_resources_cores" {
-    type    = number
-    default = 2
+  type    = number
+  default = 2
+  description = "Number of CPU"
 }
 
 variable "vm_yandex_compute_instance_resources_memory" {
-    type    = number
-    default = 1
+  type    = number
+  default = 1
+  description = "Number of memory"
 }
 
 variable "vm_yandex_compute_instance_resources_core_fraction" {
-    type    = number
-    default = 5
+  type    = number
+  default = 5
+  description = "Number of core fraction"
 }
 
 variable "vms_ssh_root_key" {
