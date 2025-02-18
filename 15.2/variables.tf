@@ -51,3 +51,9 @@ variable "vm_yandex_compute_instance_resources_core_fraction" {
   default     = 5
   description = "Number of core fraction"
 }
+
+variable "cloud-init_file" {
+  type        = string
+  default     = "./resources/cloud-init.yaml"
+  description = "Cloud-init config"
+}

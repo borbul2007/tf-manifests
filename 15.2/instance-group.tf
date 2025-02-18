@@ -10,21 +10,20 @@ resource "yandex_resourcemanager_folder_iam_member" "compute_editor" {
   folder_id  = var.folder_id
   role       = "compute.editor"
   member     = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
-#  depends_on = [
-#    yandex_iam_service_account.instance-group-sa,
-#  ]
+#  depends_on = [yandex_iam_service_account.instance-group-sa]
 }
-resource "yandex_resourcemanager_folder_iam_member" "load-balancer-editor" {
+resource "yandex_resourcemanager_folder_iam_member" "load_balancer_editor" {
   folder_id = var.folder_id
   role      = "load-balancer.editor"
   member    = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
+#  depends_on = [yandex_iam_service_account.instance-group-sa]
 }
 
 resource "yandex_compute_instance_group" "instance-group" {
   name                = "instance-group"
   folder_id           = var.folder_id
   service_account_id  = "${yandex_iam_service_account.instance-group-sa.id}"
-#  depends_on          = [yandex_resourcemanager_folder_iam_member.compute_editor]
+  depends_on          = [yandex_resourcemanager_folder_iam_member.compute_editor,andex_resourcemanager_folder_iam_member.load_balancer_editor]
   instance_template {
     platform_id = var.vm_yandex_compute_instance_platform_id
     resources {
@@ -45,7 +44,7 @@ resource "yandex_compute_instance_group" "instance-group" {
     scheduling_policy { preemptible = true }
     metadata = {
       serial-port-enable = 1
-      user-data          = "${file("cloud-init.yaml")}"
+      user-data          = "${local.cloud-init}"
     }
   }
   scale_policy {
