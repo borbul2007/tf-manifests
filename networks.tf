@@ -32,7 +32,7 @@ resource "yandex_vpc_route_table" "nat-route" {
 
 # VPC security group
 resource "yandex_vpc_security_group" "public-sg" {
-  name       = "private-sg"
+  name       = "public-sg"
   network_id = yandex_vpc_network.public.id
   egress {
     protocol       = "ANY"
