@@ -21,7 +21,7 @@ resource "yandex_compute_instance" "public" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/nt-ssh/id_ed25519.pub")}"
   }
 }
 
@@ -48,7 +48,7 @@ resource "yandex_compute_instance" "private" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/nt-ssh/id_ed25519.pub")}"
   }
 }
 
@@ -76,6 +76,6 @@ resource "yandex_compute_instance" "nat" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    user-data          = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/.ssh/id_rsa.pub")}"
+    user-data          = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/nt-ssh/id_ed25519.pub")}"
   }
 }
