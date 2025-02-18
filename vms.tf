@@ -43,7 +43,7 @@ resource "yandex_compute_instance" "private" {
   }
   network_interface {
     subnet_id          = yandex_vpc_subnet.private.id
-    security_group_ids = [yandex_vpc_security_group.private.id]
+#    security_group_ids = [yandex_vpc_security_group.private.id]
   }
   scheduling_policy { preemptible = true }
   metadata = {
@@ -75,6 +75,7 @@ resource "yandex_compute_instance" "nat" {
   }
   scheduling_policy { preemptible = true }
   metadata = {
-    user-data = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/.ssh/id_rsa.pub")}"
+    serial-port-enable = 1
+    user-data          = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/.ssh/id_rsa.pub")}"
   }
 }
