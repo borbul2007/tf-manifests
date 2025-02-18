@@ -5,6 +5,7 @@ data "yandex_compute_image" "nat" {
   family = var.vm_nat_yandex_compute_image_family
 }
 
+# VM in public network
 resource "yandex_compute_instance" "public" {
   name        = "public"
   platform_id = var.vm_yandex_compute_instance_platform_id
@@ -17,8 +18,6 @@ resource "yandex_compute_instance" "public" {
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
-#      type     = "network-hdd"
-#      size     = 10
     }
   }
   network_interface {
@@ -28,10 +27,11 @@ resource "yandex_compute_instance" "public" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    ssh-keys = "${local.ssh-key}"
+    ssh-keys           = "${local.ssh-key}"
   }
 }
 
+# VM in private network
 resource "yandex_compute_instance" "private" {
   name        = "private"
   platform_id = var.vm_yandex_compute_instance_platform_id
@@ -44,8 +44,6 @@ resource "yandex_compute_instance" "private" {
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
- #     type     = "network-hdd"
- #     size     = 10
     }
   }
   network_interface {
@@ -54,10 +52,11 @@ resource "yandex_compute_instance" "private" {
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    ssh-keys = "${local.ssh-key}"
+    ssh-keys           = "${local.ssh-key}"
   }
 }
 
+# NAT instance
 resource "yandex_compute_instance" "nat" {
   name        = "nat"
   platform_id = var.vm_yandex_compute_instance_platform_id
@@ -70,18 +69,17 @@ resource "yandex_compute_instance" "nat" {
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.nat.image_id
-#      type     = "network-hdd"
-#      size     = 10
     }
   }
   network_interface {
     subnet_id          = yandex_vpc_subnet.public.id
-    ip_address         = "192.168.10.254"
+    ip_address         = var.vm_nat_yandex_compute_ip_address
     nat                = true
   }
   scheduling_policy { preemptible = true }
   metadata = {
     serial-port-enable = 1
-    user-data          = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/nt-ssh/id_ed25519.pub")}"
+    ssh-keys           = "${local.ssh-key}"
+#   user-data          = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/nt-ssh/id_ed25519.pub")}"
   }
 }
