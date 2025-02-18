@@ -78,8 +78,7 @@ resource "yandex_compute_instance" "nat" {
   }
   scheduling_policy { preemptible = true }
   metadata = {
-#    serial-port-enable = 1
-#    ssh-keys           = "${local.ssh-key}"
-   user-data          = "#cloud-config\nusers:\n  - name: ubuntu\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file("~/nt-ssh/id_ed25519.pub")}"
+    serial-port-enable = 1
+    ssh-keys           = "${local.ssh-key}"
   }
 }

@@ -42,7 +42,7 @@ variable "vm_yandex_compute_image_family" {
 
 variable "vm_nat_yandex_compute_image_family" {
   type        = string
-  default     = "nat-instance-ubuntu"
+  default     = "nat-instance-ubuntu-2204"
   description = "VM NAT image family"
 }
 
