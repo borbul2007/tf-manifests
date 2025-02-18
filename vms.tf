@@ -54,8 +54,8 @@ resource "yandex_compute_instance" "private" {
   }
 }
 
-resource "yandex_compute_instance" "nat-instance" {
-  name        = "nat-instance"
+resource "yandex_compute_instance" "nat" {
+  name        = "nat"
   platform_id = "standard-v1"
   zone        = var.default_zone
   resources {
@@ -74,7 +74,7 @@ resource "yandex_compute_instance" "nat-instance" {
   network_interface {
     subnet_id          = yandex_vpc_subnet.public.id
     ip_address         = "192.168.10.254"
-    security_group_ids = [yandex_vpc_security_group.nat-instance-sg.id]
+    security_group_ids = [yandex_vpc_security_group.private-sg.id]
     nat                = true
   }
   scheduling_policy { preemptible = true }

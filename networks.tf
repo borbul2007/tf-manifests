@@ -21,19 +21,19 @@ resource "yandex_vpc_subnet" "private" {
 }
 
 # VPC route table
-resource "yandex_vpc_route_table" "nat-instance-route" {
-  name       = "nat-instance-route"
-  network_id = yandex_vpc_network.public.id
+resource "yandex_vpc_route_table" "nat-route" {
+  name       = "nat-route"
+  network_id = yandex_vpc_network.private.id
   static_route {
     destination_prefix = "0.0.0.0/0"
-    next_hop_address   = yandex_compute_instance.nat-instance.network_interface.0.ip_address
+    next_hop_address   = yandex_compute_instance.nat.network_interface.0.ip_address
   }
 }
 
 # VPC security group
-resource "yandex_vpc_security_group" "nat-instance-sg" {
-  name       = "nat-instance-sg"
-  network_id = yandex_vpc_network.public.id
+resource "yandex_vpc_security_group" "private-sg" {
+  name       = "private-sg"
+  network_id = yandex_vpc_network.private.id
   egress {
     protocol       = "ANY"
     description    = "any"
@@ -44,17 +44,5 @@ resource "yandex_vpc_security_group" "nat-instance-sg" {
     description    = "ssh"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 22
-  }
-  ingress {
-    protocol       = "TCP"
-    description    = "ext-http"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 80
-  }
-  ingress {
-    protocol       = "TCP"
-    description    = "ext-https"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 443
   }
 }
