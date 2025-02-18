@@ -16,11 +16,10 @@ variable "default_zone" {
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
 
-variable "private_yandex_vpc_subnet_default_cidr" {
+variable "public_yandex_vpc_subnet_default_cidr" {
   type        = list(string)
-  default     = ["192.168.20.0/24"]
+  default     = ["192.168.10.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
-}
 
 variable "vm_yandex_compute_image_family" {
   type        = string
@@ -50,10 +49,4 @@ variable "vm_yandex_compute_instance_resources_core_fraction" {
   type        = number
   default     = 5
   description = "Number of core fraction"
-}
-
-variable "ssh_root_key_file" {
-  type        = string
-  default     = "~/nt-ssh/id_ed25519.pub"
-  description = "ssh-keygen -t ed25519"
 }
