@@ -34,10 +34,16 @@ variable "vm_nat_yandex_compute_ip_address" {
   description = "VM NAT IP address"
 }
 
+variable "vm_yandex_compute_image_family" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "VM image family"
+}
+
 variable "vm_nat_yandex_compute_image_family" {
   type        = string
   default     = "nat-instance-ubuntu"
-  description = "VM image family"
+  description = "VM NAT image family"
 }
 
 variable "vm_yandex_compute_instance_platform_id" {
