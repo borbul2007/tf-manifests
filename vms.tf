@@ -1,6 +1,3 @@
-data "yandex_compute_image" "ubuntu-2004-lts" {
-  family = "ubuntu-2004-lts"
-}
 resource "yandex_compute_instance" "public" {
   name        = "public"
   platform_id = "standard-v1"
@@ -12,7 +9,7 @@ resource "yandex_compute_instance" "public" {
   }
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      image_id = "fd8guaqmm9vfb6ev4cc8"
       type     = "network-hdd"
       size     = 5
     }
@@ -39,7 +36,7 @@ resource "yandex_compute_instance" "private" {
   }
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu-2004-lts.image_id
+      image_id = "fd8guaqmm9vfb6ev4cc8"
       type     = "network-hdd"
       size     = 5
     }
@@ -65,10 +62,9 @@ resource "yandex_compute_instance" "nat" {
   }
   boot_disk {
     initialize_params {
-      name     = "boot-disk-nat"
-      type     = "network-hdd"
-      size     = "5"
       image_id = "fd80mrhj8fl2oe87o4e1"
+      type     = "network-hdd"
+      size     = 5
     }
   }
   network_interface {
