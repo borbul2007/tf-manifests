@@ -13,7 +13,7 @@ resource "yandex_lb_network_load_balancer" "load-balancer" {
       name = "http"
       http_options {
         port = 80
-        path = "/index.html"
+#        path = "/"
       }
     }
   }

@@ -59,6 +59,16 @@ resource "yandex_compute_instance_group" "instance-group" {
     max_unavailable = 1
     max_expansion   = 0
   }
+  health_check {
+    interval = 2
+    interval = 2
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+      http_options {
+        port = 80
+#        path = "/"
+      }
+  }
   load_balancer {
     target_group_name        = "target-group"
     target_group_description = "Network Load Balancer target group"
