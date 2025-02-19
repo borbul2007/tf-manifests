@@ -54,6 +54,6 @@ variable "vm_yandex_compute_instance_resources_core_fraction" {
 
 variable "cloud-init_file" {
   type        = string
-  default     = "./resources/cloud-init.yaml"
+  default     = "./resources/metadata.yaml"
   description = "Cloud-init config"
 }
