@@ -10,25 +10,29 @@ users:
   ssh_authorized_keys:
   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAI/EG5UfNnSxWsNBP0qo3Jrv2FkQlHbOypXXFxLpIM6
 write_files:
+  - path: "/var/www/html/index.html"
+    content: |
+      <html>
+      <body>
+        <p>Hostname: HOSTNAME</p>
+        <a href="https://storage.yandexcloud.net/boris-18-02-2025/netology.png">Netology banner</a>
+      </body>
+      </html>
+    owner: 'root:root'
+    permissions: '0644'
+    defer: true
+write_files:
   - path: "/usr/local/etc/startup.sh"
-    permissions: "755"
     content: |
       #!/bin/bash
 
       apt-get update
       apt-get install -y nginx
-      rm -f /var/www/html/*
-      cat > /var/www/html/index.html <<EOF
-<!doctype html>
-<html>
-  <body>
-    <p>Hostname: HOSTNAME</p>
-    <a href="https://storage.yandexcloud.net/boris-18-02-2025/netology.png">Netology banner</a></p>
-  </body>
-</html>
-EOF   
+      rm -f /var/www/html/index.nginx-debian.html
       sed -i -- "s/HOSTNAME/${HOSTNAME}/" /var/www/html/index.html
       service nginx start
+    owner: 'root:root'
+    permissions: '0644'
     defer: true
 runcmd:
   - ["/usr/local/etc/startup.sh"]
