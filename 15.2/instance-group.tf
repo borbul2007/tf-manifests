@@ -6,12 +6,12 @@ resource "yandex_iam_service_account" "instance-group-sa" {
   name        = "instance-group-sa"
   description = "Service account for managing the instance group"
 }
-#resource "yandex_resourcemanager_folder_iam_member" "compute_editor" {
-#  folder_id  = var.folder_id
-#  role       = "editor"
-#  member     = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
-#  depends_on = [yandex_iam_service_account.instance-group-sa]
-#}
+resource "yandex_resourcemanager_folder_iam_member" "editor" {
+  folder_id  = var.folder_id
+  role       = "editor"
+  member     = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
+  depends_on = [yandex_iam_service_account.instance-group-sa]
+}
 #resource "yandex_resourcemanager_folder_iam_member" "load_balancer_editor" {
 #  folder_id = var.folder_id
 #  role      = "load-balancer.editor"
@@ -23,7 +23,7 @@ resource "yandex_compute_instance_group" "instance-group" {
   name                = "instance-group"
   folder_id           = var.folder_id
   service_account_id  = "${yandex_iam_service_account.instance-group-sa.id}"
-  #depends_on          = [yandex_resourcemanager_folder_iam_member.compute_editor,yandex_resourcemanager_folder_iam_member.load_balancer_editor]
+  #depends_on          = [yandex_resourcemanager_folder_iam_member.editor]
   instance_template {
     platform_id = var.vm_yandex_compute_instance_platform_id
     resources {

@@ -17,8 +17,8 @@ write_files:
 
       apt-get update
       apt-get install -y nginx
+      echo "${HOSTNAME}\n https://storage.yandexcloud.net/boris-18-02-2025/netology.png" > /var/www/html/index.nginx-debian.html"
       service nginx start
-      sed -i -- "s/nginx/Yandex Cloud - ${HOSTNAME}/" /var/www/html/index.nginx-debian.html
     defer: true
 runcmd:
   - ["/usr/local/etc/startup.sh"]
