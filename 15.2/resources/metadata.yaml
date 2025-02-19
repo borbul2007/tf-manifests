@@ -17,7 +17,17 @@ write_files:
 
       apt-get update
       apt-get install -y nginx
-      sed -i -- "s/nginx/Yandex Cloud - ${HOSTNAME}/" /var/www/html/index.nginx-debian.html
+      sudo rm -f /var/www/html/index.nginx-debian.html
+      cat > /var/www/html/index.html << EOF
+<!doctype html>
+<html>
+  <body>
+    <p>Hostname: HOSTNAME</p>
+    <a href="https://storage.yandexcloud.net/boris-18-02-2025/netology.png">Netology banner</a></p>
+  </body>
+</html>
+EOF   
+      sed -i -- "s/HOSTNAME/${HOSTNAME}/" /var/www/html/index.html
       service nginx start
     defer: true
 runcmd:
