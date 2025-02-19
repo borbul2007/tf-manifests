@@ -10,7 +10,7 @@ users:
   ssh_authorized_keys:
   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAI/EG5UfNnSxWsNBP0qo3Jrv2FkQlHbOypXXFxLpIM6
 write_files:
-  - path: "/var/www/html/index.html"
+  - path: "/var/www/html/netology.html"
     content: |
       <html>
       <body>
@@ -25,7 +25,7 @@ write_files:
 
       apt-get update
       apt-get install -y nginx
-      rm -f /var/www/html/index.nginx-debian.html
+      rm -f /var/www/html/index.* && mv /var/www/html/netology.html /var/www/html/index.html
       sed -i -- "s/HOSTNAME/${HOSTNAME}/" /var/www/html/index.html
       service nginx start
     permissions: '0755'
