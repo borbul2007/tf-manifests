@@ -1,4 +1,4 @@
-resource "yandex_lb_network_load_balancer" "load-balancer" {
+resource "yandex_lb_network_load_balancer" "network-load-balancer" {
   name = "network-load-balancer"
   listener {
     name = "network-load-balancer-listener"
