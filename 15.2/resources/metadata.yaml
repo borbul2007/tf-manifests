@@ -18,7 +18,6 @@ write_files:
         <a href="https://storage.yandexcloud.net/boris-18-02-2025/netology.png">Netology banner</a>
       </body>
       </html>
-    owner: 'root:root'
     permissions: '0644'
 write_files:
   - path: "/usr/local/etc/startup.sh"
@@ -30,7 +29,6 @@ write_files:
       rm -f /var/www/html/index.nginx-debian.html
       sed -i -- "s/HOSTNAME/${HOSTNAME}/" /var/www/html/index.html
       service nginx start
-    owner: 'root:root'
     permissions: '0644'
     defer: true
 runcmd:
