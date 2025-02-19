@@ -43,7 +43,7 @@ resource "yandex_compute_instance_group" "instance-group" {
   }
   scale_policy {
     fixed_scale {
-      size = 2
+      size = 3
     }
   }
   allocation_policy {
