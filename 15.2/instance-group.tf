@@ -2,22 +2,22 @@ data "yandex_compute_image" "lamp" {
   family = var.vm_yandex_compute_image_family
 }
 
-resource "yandex_iam_service_account" "instance-group-sa" {
-  name        = "instance-group-sa"
-  description = "Service account for managing the instance group"
-}
-resource "yandex_resourcemanager_folder_iam_member" "compute_editor" {
-  folder_id  = var.folder_id
-  role       = "editor"
-  member     = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
-  depends_on = [yandex_iam_service_account.instance-group-sa]
-}
-resource "yandex_resourcemanager_folder_iam_member" "load_balancer_editor" {
-  folder_id = var.folder_id
-  role      = "load-balancer.editor"
-  member    = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
-  depends_on = [yandex_iam_service_account.instance-group-sa]
-}
+#resource "yandex_iam_service_account" "instance-group-sa" {
+#  name        = "instance-group-sa"
+#  description = "Service account for managing the instance group"
+#}
+#resource "yandex_resourcemanager_folder_iam_member" "compute_editor" {
+#  folder_id  = var.folder_id
+#  role       = "editor"
+#  member     = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
+#  depends_on = [yandex_iam_service_account.instance-group-sa]
+#}
+#resource "yandex_resourcemanager_folder_iam_member" "load_balancer_editor" {
+#  folder_id = var.folder_id
+#  role      = "load-balancer.editor"
+#  member    = "serviceAccount:${yandex_iam_service_account.instance-group-sa.id}"
+#  depends_on = [yandex_iam_service_account.instance-group-sa]
+#}
 
 resource "yandex_compute_instance_group" "instance-group" {
   name                = "instance-group"
