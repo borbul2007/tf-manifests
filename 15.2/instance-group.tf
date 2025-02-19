@@ -23,7 +23,7 @@ resource "yandex_compute_instance_group" "instance-group" {
   name                = "instance-group"
   folder_id           = var.folder_id
   service_account_id  = "${yandex_iam_service_account.instance-group-sa.id}"
-  depends_on          = [yandex_resourcemanager_folder_iam_member.compute_editor,andex_resourcemanager_folder_iam_member.load_balancer_editor]
+  depends_on          = [yandex_resourcemanager_folder_iam_member.compute_editor,yandex_resourcemanager_folder_iam_member.load_balancer_editor]
   instance_template {
     platform_id = var.vm_yandex_compute_instance_platform_id
     resources {
@@ -64,10 +64,10 @@ resource "yandex_compute_instance_group" "instance-group" {
     timeout             = 1
     healthy_threshold   = 2
     unhealthy_threshold = 2
-      http_options {
-        port = 80
-#        path = "/"
-      }
+    http_options {
+      port = 80
+#      path = "/"
+    }
   }
   load_balancer {
     target_group_name        = "target-group"
