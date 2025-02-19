@@ -66,7 +66,7 @@ resource "yandex_compute_instance_group" "instance-group" {
     unhealthy_threshold = 2
     http_options {
       port = 80
-#      path = "/"
+      path = "/"
     }
   }
   load_balancer {
