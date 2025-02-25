@@ -19,7 +19,7 @@ resource "yandex_kms_symmetric_key" "key" {
   rotation_period   = "8760h"
 }
 
-resource "yandex_storage_bucket" "test" {
+resource "yandex_storage_bucket" "bucket" {
   bucket     = var.bucket_name
   access_key = yandex_iam_service_account_static_access_key.key.access_key
   secret_key = yandex_iam_service_account_static_access_key.key.secret_key
