@@ -1,5 +1,15 @@
+resource "yandex_iam_service_account" "storage-admin" {
+  name = "storage-admin"
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "storage-admin" {
+  folder_id = var.folder_id
+  role      = "storage.admin"
+  member    = "serviceAccount:${yandex_iam_service_account.storage-admin.id}"
+}
+
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
-  service_account_id = yandex_iam_service_account.nt-terraform.id
+  service_account_id = yandex_iam_service_account.storage-admin.id
   description        = "static access key for object storage"
 }
 
