@@ -23,7 +23,7 @@ variable "public_yandex_vpc_subnet_default_cidr" {
 }
 
 variable "bucket_name" {
-  type        = list(string)
+  type        = string
   default     = "boris-25-02-2025"
   description = "Object Storage bucket name"
 }
